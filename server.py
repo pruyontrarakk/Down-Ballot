@@ -43,7 +43,7 @@ def user():
         return render_template('form.html')
 
 
-def get_elections(address):
+def get_elections(address: str, levels: list[str]):
     params = {
         'key': CIVIC_INFO_API_KEY
     }
