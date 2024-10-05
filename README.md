@@ -10,6 +10,7 @@ venv\Scripts\activate       # on Windows
 
 pip install Flask
 pip install requests
+pip install openai
 ```
 
 ## Run the App
