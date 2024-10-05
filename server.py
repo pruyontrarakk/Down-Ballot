@@ -8,10 +8,10 @@ from api_secrets import OPENAI_API_KEY, MAPS_API_KEY, CIVIC_INFO_API_KEY
 
 openai_client = OpenAI(api_key=OPENAI_API_KEY)
 
-list_level = ["Federal", "State", "District", "All"]
-list_inquiry = ["Election Ballot", "Environmental Issues", "Healthcare Issues",
+list_level = ["Federal", "State", "District", "Local"]
+list_inquiry = ["Climate Change", "Healthcare",
                 "Immigration", "Education", "Housing", "Foreign Policy",
-                "Infrastructure", "Taxes", "Wages & Job Benefits", "All"]
+                "Infrastructure", "Economy", "Criminal Justice", "Guns", "Reproductive Health"]
 
 app = Flask(__name__)
 base_elections_url = 'https://www.googleapis.com/civicinfo/v2/elections'
