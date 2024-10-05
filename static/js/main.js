@@ -35,7 +35,7 @@ $(document).ready(function () {
                 processData: false,
                 contentType: false,
                 success: function (response) {
-                    console.log(`Stored on server: `, response);
+                    console.log(`Got from server:`, response);
                 },
                 error: function (error) {
                     console.error('Error sending data:', error);

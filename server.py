@@ -1,4 +1,5 @@
 import datetime
+
 import requests
 from flask import Flask, request, render_template, jsonify
 from openai import OpenAI
@@ -35,23 +36,20 @@ def user():
         user_info['address'] = request.form['address']
         user_info['level_choices'] = request.form['level_choices']
         user_info['policy_choices'] = request.form['policy_choices']
-        return jsonify(user_info)
+        current_year_elections, rep_data = get_elections(user_info['address'])
+        return jsonify({"elections": current_year_elections, "representatives": rep_data})
     else:
         return render_template('form.html')
 
 
-def send_request_to_api():
-    zip_code = '10027'
-    state = 'NY'
-    address = f'1600 Amphitheatre Parkway, Mountain View, {state} {zip_code}'
-
+def get_elections(address):
     params = {
         'key': CIVIC_INFO_API_KEY
     }
 
-    current_year = datetime.now().year
+    current_year = datetime.datetime.now().year
     # get the current year's election info
-    elections_response = requests.get(base_elections_url, params=CIVIC_INFO_API_KEY)
+    elections_response = requests.get(base_elections_url, params=params)
     if elections_response.status_code == 200:
         elections_data = elections_response.json()
         elections = elections_data.get('elections', [])
@@ -68,6 +66,7 @@ def send_request_to_api():
     else:
         print(f'Error: {elections_response.status_code}')
         print(elections_response.text)
+        current_year_elections = None
 
     # get representative information
     rep_params = {
@@ -79,15 +78,15 @@ def send_request_to_api():
 
     if rep_response.status_code == 200:
         rep_data = rep_response.json()
-        print("\nRepresentatives:")
-        for official in rep_data.get('officials', []):
-            print(f"- {official['name']}: {official.get('party', 'No party info')}")
+        # print("\nRepresentatives:")
+        # for official in rep_data.get('officials', []):
+        #     print(f"- {official['name']}: {official.get('party', 'No party info')}")
     else:
         print(f'Error fetching representatives: {rep_response.status_code}')
         print(rep_response.text)
+        rep_data = None
 
-    return render_template("results.html", title="Results", current_year_elections=current_year_elections,
-                           rep_data=rep_data)
+    return current_year_elections, rep_data
 
 
 if __name__ == '__main__':
