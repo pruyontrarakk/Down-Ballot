@@ -22,7 +22,7 @@ def user():
     if request.method == 'POST':
         user_info['zipcode'] = request.form['zipcode']
         user_info['policy_interests'] = request.form['policy_interests']
-        return render_template('user.html', user_info=user_info)
+        return True
     else:
         return render_template('form.html')
 
