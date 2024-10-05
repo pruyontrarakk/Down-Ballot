@@ -3,13 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DownBallot</title>
-    <link rel="stylesheet" href="{{url_for('static/css', filename='main.css')}}">
+    <title>Form</title>
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
+
+<!-- Header Section -->
+<header class="site-header">
+    <h1>Welcome to Down Ballot!</h1>
+    <p>Your voice matters! Get involved and stay informed.</p>
+</header>
 <div id="content">
     {% block content %}
     {% endblock %}
 </div>
+<footer class="site-footer">
+    <p>&copy; 2024 Down Ballot. All Rights Reserved.</p>
+</footer>
+
+<!-- Link to external JS file -->
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

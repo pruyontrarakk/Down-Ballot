@@ -1,9 +1,34 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<form action="/submit" method="post">
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name">
-    <input type="submit" value="Submit">
-</form>
+<main class="form-container">
+        <form class="form" action="">
+            <div class="field half">
+                <label for="zipcode">5-Digit Zipcode (ie. 10027):</label>
+                <input type="text" id="zipcode" name="zipcode" class="text-input">
+            </div>
+            <div class="field half">
+                <label for="state">State Abbreviation (ie. CA):</label>
+                <input type="text" id="state" name="state" class="text-input">
+            </div>
+
+            <div class="field">
+                <label>Select your concerns and/or inquiries: </label>
+                <ul class="checkboxes">
+                    <li class="checkbox">
+                        <input type="checkbox" id="choice-0" class="checkbox-input" name="choice" value="0">
+                        <label for="choice-0">Election Ballot</label>
+                    </li>
+                    <li class="checkbox">
+                        <input type="checkbox" id="choice-1" class="checkbox-input" name="choice" value="1">
+                        <label for="choice-1">District Environmental Issues</label>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="field half">
+                <input type="submit" class="button" value="Send">
+            </div>
+        </form>
+    </main>
 {% endblock %}
