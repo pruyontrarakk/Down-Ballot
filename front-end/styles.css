@@ -1,0 +1,147 @@
+/* General styling */
+body {
+    background-color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+/* Form container */
+.form {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form fields */
+.field {
+    margin-bottom: 20px;
+}
+
+.half {
+    width: 100%;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+/* Text input styles */
+.text-input {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.2rem;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-top: 5px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.text-input:focus {
+    border-color: #9c453a;
+    outline: none;
+}
+
+/* Checkbox buttons */
+.checkboxes {
+    list-style-type: none; /* Removes bullets */
+    padding: 0; /* Removes default padding */
+    display: flex;
+    gap: 10px; /* Adds spacing between the buttons */
+}
+
+.checkbox {
+    flex: 1;
+}
+
+
+.checkbox-input {
+    display: none;
+}
+
+.checkbox-input + label {
+    background-color: #e7e7e7;
+    padding: 15px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 1.1rem;
+    display: block;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.checkbox-input:checked + label {
+    background-color: #9c453a;
+    color: white;
+}
+
+/* Button styles */
+.button {
+    background-color: #9c453a;
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+}
+
+.button:hover {
+    background-color: #9c453a;
+}
+
+
+
+/* Header styling */
+.site-header {
+    background-color: #ffffff;
+    color: rgb(90, 43, 43);
+    padding: 20px 0;
+    text-align: center;
+}
+
+.site-header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.site-header p {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+
+
+/* Footer styling */
+.site-footer {
+    background-color: #ffffff;
+    color: rgb(90, 43, 43);
+    text-align: center;
+    padding: 20px 0;
+
+    bottom: 0;
+    width: 100%;
+}
+
+.site-footer p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.field {
+    margin-bottom: 20px;
+}
