@@ -9,6 +9,7 @@ source venv/bin/activate    # on macOS/Linux
 venv\Scripts\activate       # on Windows
 
 pip install Flask
+pip install requests
 ```
 
 ## Run the App
