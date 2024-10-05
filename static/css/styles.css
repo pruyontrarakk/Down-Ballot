@@ -1,10 +1,13 @@
 
 /* General styling */
-body {
+
+body, html {
     background-color: #ffffff;
-    font-family: 'Arial', sans-serif;
-    color: #333;
-    padding: 20px;
+    font-family: 'Lato', sans-serif;
+    margin: 0; /* Remove any margin from the body and html */
+    padding: 0; /* Remove any padding from the body and html */
+    width: 100%; /* Ensure full width */
+    height: 100%; /* Ensure full height */
 }
 
 h1, h2 {
@@ -164,37 +167,40 @@ label {
 
 /* Header styling */
 .site-header {
-    background-color: #ffffff;
     color: rgb(90, 43, 43);
-    padding: 15px 0; /* Decrease padding */
+    padding: 12px 0; /* Decrease padding */
     text-align: center;
     width: 100%;
     position: relative;
+    background-color: #9c453a;
 }
 
 .site-header h1 {
     margin: 0;
-    font-size: 1.8rem; /* Decrease font-size */
+    font-size: 1.7rem; /* Decrease font-size */
+    color: #e7e7e7;
+
 }
 
 .site-header p {
     margin: 0;
-    font-size: 1rem; /* Decrease font-size */
+    font-size: 0.8rem; /* Decrease font-size */
+    color: #dcbebe;
 }
+
 
 /* Footer styling */
 .site-footer {
-    background-color: #ffffff;
-    color: rgb(90, 43, 43);
-    text-align: center;
-    padding: 15px 0; /* Decrease padding */
+    background-color: #9c453a;
+    color: rgb(211, 211, 211);
+    text-align: right; /* Align the text to the right */
+    padding: 1px 0; /* Decrease padding */
     bottom: 0;
     width: 100%;
     position: relative;
+    font-size: 0.8rem;
 }
 
-.site-footer p {
-    margin: 0;
-    font-size: 0.9rem; /* Decrease font-size */
+.footer-content {
+    padding-right: 30px; /* Adds padding inside the footer */
 }
-
