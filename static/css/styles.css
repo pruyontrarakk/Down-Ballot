@@ -1,8 +1,6 @@
-
 /* General styling */
-
 body, html {
-    background-color: #ffffff;
+    background-color: #F4EDE4; /* Soft Cream */
     font-family: 'Lato', sans-serif;
     margin: 0; /* Remove any margin from the body and html */
     padding: 0; /* Remove any padding from the body and html */
@@ -18,7 +16,7 @@ h1, h2 {
 .form {
     max-width: 800px;
     margin: 0 auto;
-    background-color: #ffffff;
+    background-color: #F4EDE4;
     padding: 25px; /* Decrease padding */
     border-radius: 10px;
 }
@@ -54,7 +52,7 @@ label {
 }
 
 .text-input:focus {
-    border-color: #9c453a;
+    border-color: #AFC7D0; /* Light Muted Blue */
     outline: none;
 }
 
@@ -86,7 +84,7 @@ label {
 
 /* Red box around the checkboxes */
 .button-box {
-    border: 1px solid #9c453a; /* Red border */
+    border: 1px solid #6A9FB5; /* Muted Blue */
     padding: 5px;
     border-radius: 5px;
     margin-bottom: 5px;
@@ -113,7 +111,7 @@ label {
 }
 
 .checkbox-input + label {
-    background-color: #e7e7e7;
+    background-color: #AFC7D0; /* Light Muted Blue */
     padding: 8px 18px; /* Decrease padding */
     border-radius: 8px;
     cursor: pointer;
@@ -127,7 +125,7 @@ label {
 
 /* Change background and text color when checkbox is selected */
 .checkbox-input:checked + label {
-    background-color: #9c453a;
+    background-color: #B5695D; /* Muted Red */
     color: white;
 }
 
@@ -143,7 +141,7 @@ label {
     display: block;
     margin: 5px auto;
     padding: 8px 25px; /* Decrease padding */
-    background-color: #A33A2F;
+    background-color: #DFA89E; /* Light Muted Red */
     color: white;
     font-weight: bold;
     border: none;
@@ -155,46 +153,46 @@ label {
 
 /* Change color when hovering */
 .button:hover {
-    background-color: #932a22;
+    background-color: #6A9FB5; /* Muted Blue */
     transform: scale(1.05);
 }
 
 /* Change style when the button is clicked */
 .button:active {
-    background-color: #82281d;
+    background-color: #B5695D; /* Muted Red */
     transform: scale(0.95);
 }
 
 /* Header styling */
 .site-header {
-    color: rgb(90, 43, 43);
-    padding: 12px 0; /* Decrease padding */
+    color: #AFC7D0; /* Light Muted Blue */
+    padding: 20px 0; /* Decrease padding */
     text-align: center;
     width: 100%;
     position: relative;
-    background-color: #9c453a;
+    background-color: #F4EDE4; /* Muted Red */
+
+    border-bottom: 1px solid #DFA89E;
 }
 
 .site-header h1 {
     margin: 0;
     font-size: 1.7rem; /* Decrease font-size */
-    color: #e7e7e7;
-
+    color: #B5695D; /* Soft Cream */
 }
 
 .site-header p {
     margin: 0;
     font-size: 0.8rem; /* Decrease font-size */
-    color: #dcbebe;
+    color: #DFA89E; /* Light Muted Red */
 }
-
 
 /* Footer styling */
 .site-footer {
-    background-color: #9c453a;
-    color: rgb(211, 211, 211);
+    background-color: #F4EDE4; /* Muted Red */
+    color: #B5695D; /* Soft Cream */
     text-align: right; /* Align the text to the right */
-    padding: 1px 0; /* Decrease padding */
+    padding: 5px 0; /* Decrease padding */
     bottom: 0;
     width: 100%;
     position: relative;
