@@ -17,7 +17,6 @@ h1, h2 {
     background-color: #ffffff;
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Form fields */
@@ -55,37 +54,66 @@ label {
 }
 
 /* Checkbox buttons */
+/* Flexbox container for checkboxes */
 .checkboxes {
-    list-style-type: none; /* Removes bullets */
-    padding: 0; /* Removes default padding */
     display: flex;
-    gap: 10px; /* Adds spacing between the buttons */
+    flex-wrap: wrap; /* Allows checkboxes to wrap neatly */
+    justify-content: center; /* Centers the items within the container */
+    gap: 20px; /* Adds more space between the buttons */
+    list-style-type: none; /* Removes bullet points */
+    margin: 20px 0;
+    padding: 0;
 }
 
+.checkboxes-2 {
+    display: flex;
+    flex-wrap: wrap; /* Allows the items to wrap onto the next line */
+    justify-content: center; /* Centers the items in the container */
+    align-items: center; /* Aligns the items vertically */
+    gap: 10px; /* Adds space between the buttons */
+    padding: 0;
+    list-style-type: none; /* Removes bullet points */
+    margin: 20px 0;
+}
+
+/* Individual checkbox styles */
 .checkbox {
-    flex: 1;
+    flex: 1 1 200px; /* Minimum width of 200px, each checkbox will take up at least this much space */
+    display: flex;
+    justify-content: center; /* Centers the label within the checkbox container */
 }
-
 
 .checkbox-input {
-    display: none;
+    display: none; /* Hide the actual checkbox */
 }
 
 .checkbox-input + label {
     background-color: #e7e7e7;
-    padding: 15px 20px;
+    padding: 15px 30px; /* Adjust the padding for a balanced button size */
     border-radius: 8px;
     cursor: pointer;
-    text-align: center;
     font-size: 1.1rem;
-    display: block;
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    text-align: center;
+    display: block;
+    white-space: nowrap; /* Prevents text wrapping */
+    min-width: 150px; /* Ensure uniform minimum size for the buttons */
 }
 
+/* Change background and text color when checkbox is selected */
 .checkbox-input:checked + label {
     background-color: #9c453a;
     color: white;
 }
+
+/* Ensure checkboxes are responsive on mobile devices */
+@media (max-width: 768px) {
+    .checkbox {
+        flex: 1 1 100%; /* Make each checkbox take up the full width on smaller screens */
+    }
+}
+
+
 
 /* Button styles */
 .button {
@@ -97,7 +125,7 @@ label {
     border-radius: 5px;
     cursor: pointer;
     display: block;
-    width: 100%;
+    width: 80%;
 }
 
 .button:hover {

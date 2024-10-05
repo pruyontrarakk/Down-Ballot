@@ -4,6 +4,12 @@ from openai import OpenAI
 
 openai_client = OpenAI(api_key=API_KEY)
 
+list_level = ["Federal", "State", "District", "All"]
+list_inquiry = ["Election Ballot", "Environmental Issues", "Healthcare Issues", 
+               "Immigration", "Education", "Housing", "Foreign Policy", "Infrastructure", "Taxes"]
+
+
+
 app = Flask(__name__)
 
 
@@ -15,7 +21,7 @@ user_info = {
 
 @app.route('/')
 def home():
-    return render_template('form.html')
+    return render_template('form.html', level = list_level, inquiry = list_inquiry)
 
 @app.route('/user', method=['POST', 'GET'])
 def user():

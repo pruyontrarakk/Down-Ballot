@@ -12,18 +12,33 @@
                 <input type="text" id="state" name="state" class="text-input">
             </div>
 
-            <div class="field">
-                <label>Select your concerns and/or inquiries: </label>
+            <div class="field"></div>
+                <label>Which level: </label>
                 <ul class="checkboxes">
+                    {% for l in level %}
                     <li class="checkbox">
-                        <input type="checkbox" id="choice-0" class="checkbox-input" name="choice" value="0">
-                        <label for="choice-0">Election Ballot</label>
+                        <input type="checkbox" id="choice-{{l}}" class="checkbox-input" name="choice" value="{{l}}">
+                        <label for="choice-{{l}}">{{l}}</label>
                     </li>
-                    <li class="checkbox">
-                        <input type="checkbox" id="choice-1" class="checkbox-input" name="choice" value="1">
-                        <label for="choice-1">District Environmental Issues</label>
-                    </li>
+                    {% endfor %}
+                    
                 </ul>
+
+                <br>
+                <br>
+
+                <label>Select your concerns and/or inquiries: </label>
+                <ul class="checkboxes-2">
+
+                    {% for i in inquiry %}
+                    <li class="checkbox">
+                        <input type="checkbox" id="choice-{{i}}" class="checkbox-input" name="choice" value="{{i}}">
+                        <label for="choice-{{i}}">{{i}}</label>
+                    </li>
+                    {% endfor %}
+
+                </ul>
+                
             </div>
 
             <div class="field half">
