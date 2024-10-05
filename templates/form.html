@@ -19,7 +19,7 @@
                 <label>Select a level: </label>
 
                 <div class="button-box">
-                    <ul class="checkboxes">
+                    <ul id="levels" class="checkboxes">
                         {% for l in level %}
                         <li class="checkbox">
                             <input type="checkbox" id="choice-{{l}}" class="checkbox-input" name="choice" value="{{l}}">
@@ -35,7 +35,7 @@
 
                 <label>Select your concerns and/or inquiries: </label>
                 <div class="button-box">
-                    <ul class="checkboxes-2">
+                    <ul id="policy-interests" class="checkboxes-2">
                         {% for i in inquiry %}
                         <li class="checkbox">
                             <input type="checkbox" id="choice-{{i}}" class="checkbox-input" name="choice" value="{{i}}">

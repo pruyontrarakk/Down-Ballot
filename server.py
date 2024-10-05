@@ -1,11 +1,9 @@
-from flask import Flask, jsonify, request, render_template
+import datetime
 import requests
+from flask import Flask, request, render_template, jsonify
 from openai import OpenAI
 
-import datetime
-
 from api_secrets import OPENAI_API_KEY, MAPS_API_KEY, CIVIC_INFO_API_KEY
-
 
 openai_client = OpenAI(api_key=OPENAI_API_KEY)
 
@@ -14,33 +12,30 @@ list_inquiry = ["Election Ballot", "Environmental Issues", "Healthcare Issues",
                 "Immigration", "Education", "Housing", "Foreign Policy",
                 "Infrastructure", "Taxes", "Wages & Job Benefits", "All"]
 
-
-
-
-
 app = Flask(__name__)
 base_elections_url = 'https://www.googleapis.com/civicinfo/v2/elections'
 base_representatives_url = 'https://www.googleapis.com/civicinfo/v2/representatives'
 
-
-
 user_info = {
-    "zipcode": 0,
-    "policy_interests": ["climate_change", "democracy", "healthcare", "education"]
+    "address": None,
+    "policy_choices": None,
+    "level_choices": None
 }
 
 
 @app.route('/')
 def home():
-    return render_template('form.html', maps_api_key=MAPS_API_KEY,level=list_level, inquiry=list_inquiry)
+    return render_template('form.html', maps_api_key=MAPS_API_KEY, level=list_level, inquiry=list_inquiry)
 
 
 @app.route('/user', methods=['POST', 'GET'])
 def user():
+    global user_info
     if request.method == 'POST':
-        user_info['zipcode'] = request.form['zipcode']
-        user_info['policy_interests'] = request.form['policy_interests']
-        return True
+        user_info['address'] = request.form['address']
+        user_info['level_choices'] = request.form['level_choices']
+        user_info['policy_choices'] = request.form['policy_choices']
+        return jsonify(user_info)
     else:
         return render_template('form.html')
 
@@ -91,7 +86,9 @@ def send_request_to_api():
         print(f'Error fetching representatives: {rep_response.status_code}')
         print(rep_response.text)
 
-    return render_template("results.html", title="Results", current_year_elections=current_year_elections, rep_data=rep_data)
+    return render_template("results.html", title="Results", current_year_elections=current_year_elections,
+                           rep_data=rep_data)
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
