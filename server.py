@@ -11,7 +11,10 @@ openai_client = OpenAI(api_key=OPENAI_API_KEY)
 
 list_level = ["Federal", "State", "District", "All"]
 list_inquiry = ["Election Ballot", "Environmental Issues", "Healthcare Issues",
-                "Immigration", "Education", "Housing", "Foreign Policy", "Infrastructure", "Taxes"]
+                "Immigration", "Education", "Housing", "Foreign Policy",
+                "Infrastructure", "Taxes", "Wages & Job Benefits", "All"]
+
+
 
 
 

@@ -1,39 +1,51 @@
 {% extends "layout.html" %}
 
 {% block content %}
+
 <script src="https://maps.googleapis.com/maps/api/js?key={{maps_api_key}}&libraries=places"></script>
+
 
 <main class="form-container">
         <form class="form" id="user-info" action="">
-            <label for="street-address">Street address:</label>
-            <input id="street-address">
+            <div class="field half">
+                <label for="street-address">Street address:</label>
+                <input id="street-address", class="text-input">
+            </div>
+
+            <br>
+
+
             <div class="field"></div>
                 <label>Which level: </label>
-                <ul class="checkboxes">
-                    {% for l in level %}
-                    <li class="checkbox">
-                        <input type="checkbox" id="choice-{{l}}" class="checkbox-input" name="choice" value="{{l}}">
-                        <label for="choice-{{l}}">{{l}}</label>
-                    </li>
-                    {% endfor %}
-                    
-                </ul>
+
+                <div class="button-box">
+                    <ul class="checkboxes">
+                        {% for l in level %}
+                        <li class="checkbox">
+                            <input type="checkbox" id="choice-{{l}}" class="checkbox-input" name="choice" value="{{l}}">
+                            <label for="choice-{{l}}">{{l}}</label>
+                        </li>
+                        {% endfor %}
+
+                    </ul>
+                </div>
 
                 <br>
                 <br>
 
                 <label>Select your concerns and/or inquiries: </label>
-                <ul class="checkboxes-2">
+                <div class="button-box">
+                    <ul class="checkboxes-2">
+                        {% for i in inquiry %}
+                        <li class="checkbox">
+                            <input type="checkbox" id="choice-{{i}}" class="checkbox-input" name="choice" value="{{i}}">
+                            <label for="choice-{{i}}">{{i}}</label>
+                        </li>
+                        {% endfor %}
 
-                    {% for i in inquiry %}
-                    <li class="checkbox">
-                        <input type="checkbox" id="choice-{{i}}" class="checkbox-input" name="choice" value="{{i}}">
-                        <label for="choice-{{i}}">{{i}}</label>
-                    </li>
-                    {% endfor %}
+                    </ul>
+                </div>
 
-                </ul>
-                
             </div>
 
             <div class="field half">
