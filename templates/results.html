@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<main class="form-container">
+<!--    <form class="form" id="user-info" action="">-->
+
+        <div class="field"></div>
+        <label>Upcoming Elections: </label>
+        <ul class="checkboxes">
+            {% for election in current_year_elections %}
+            <li class="checkbox" value="{{election}}">
+            </li>
+            {% endfor %}
+        </ul>
+
+        <br>
+        <br>
+
+        <label>Your Representatives: </label>
+        <ul class="checkboxes-2">
+
+            {% for data in rep_data %}
+            <li class="checkbox">
+                <input type="checkbox" id="choice-{{i}}" class="checkbox-input" name="choice" value="{{i}}">
+                <label for="choice-{{i}}">{{i}}</label>
+            </li>
+            {% endfor %}
+        </ul>
+<!--    </form>-->
+</main>
+{% endblock %}
