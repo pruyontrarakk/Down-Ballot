@@ -1,13 +1,17 @@
 from flask import Flask, jsonify, request, render_template
 import requests
-from openai_secrets import API_KEY
 from openai import OpenAI
 
-openai_client = OpenAI(api_key=API_KEY)
+import datetime
+
+from api_secrets import OPENAI_API_KEY, MAPS_API_KEY
+
+
+openai_client = OpenAI(api_key=OPENAI_API_KEY)
 
 list_level = ["Federal", "State", "District", "All"]
 list_inquiry = ["Election Ballot", "Environmental Issues", "Healthcare Issues",
-               "Immigration", "Education", "Housing", "Foreign Policy", "Infrastructure", "Taxes"]
+                "Immigration", "Education", "Housing", "Foreign Policy", "Infrastructure", "Taxes"]
 
 
 
@@ -23,11 +27,13 @@ user_info = {
     "policy_interests": ["climate_change", "democracy", "healthcare", "education"]
 }
 
+
 @app.route('/')
 def home():
-    return render_template('form.html', level = list_level, inquiry = list_inquiry)
+    return render_template('form.html', maps_api_key=MAPS_API_KEY,level=list_level, inquiry=list_inquiry)
 
-@app.route('/user', method=['POST', 'GET'])
+
+@app.route('/user', methods=['POST', 'GET'])
 def user():
     if request.method == 'POST':
         user_info['zipcode'] = request.form['zipcode']
@@ -35,11 +41,6 @@ def user():
         return True
     else:
         return render_template('form.html')
-
-@app.route('/api/data', methods=['GET'])
-def get_data():
-    data = {"message": "Hello, World!"}
-    return jsonify(data)
 
 
 def send_request_to_api():
@@ -55,19 +56,18 @@ def send_request_to_api():
     # get the current year's election info
     elections_response = requests.get(base_elections_url, params=civic_info_key)
     if elections_response.status_code == 200:
-        elections_data = response.json()
+        elections_data = elections_response.json()
         elections = elections_data.get('elections', [])
 
-            # Filter elections for the current year
-            current_year_elections = [
-                election for election in elections
-                if election['electionDay'].startswith(str(current_year))
-            ]
+        # Filter elections for the current year
+        current_year_elections = [
+            election for election in elections
+            if election['electionDay'].startswith(str(current_year))
+        ]
 
-            print("Upcoming Elections in Current Year:")
-            for election in current_year_elections:
-                print(f"- {election['name']} on {election['electionDay']}")
-        print(data)
+        print("Upcoming Elections in Current Year:")
+        for election in current_year_elections:
+            print(f"- {election['name']} on {election['electionDay']}")
     else:
         print(f'Error: {elections_response.status_code}')
         print(elections_response.text)
@@ -89,7 +89,7 @@ def send_request_to_api():
         print(f'Error fetching representatives: {rep_response.status_code}')
         print(rep_response.text)
 
-    return render_template(results.html, title="Results", current_year_elections=current_year_elections, rep_data=rep_data)
+    return render_template("results.html", title="Results", current_year_elections=current_year_elections, rep_data=rep_data)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)

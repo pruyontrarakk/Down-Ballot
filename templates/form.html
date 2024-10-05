@@ -1,17 +1,12 @@
 {% extends "layout.html" %}
 
 {% block content %}
+<script src="https://maps.googleapis.com/maps/api/js?key={{maps_api_key}}&libraries=places"></script>
+
 <main class="form-container">
         <form class="form" id="user-info" action="">
-            <div class="field half">
-                <label for="zipcode">5-Digit Zipcode (ie. 10027):</label>
-                <input type="text" id="zipcode" name="zipcode" class="text-input">
-            </div>
-            <div class="field half">
-                <label for="state">State Abbreviation (ie. CA):</label>
-                <input type="text" id="state" name="state" class="text-input">
-            </div>
-
+            <label for="street-address">Street address:</label>
+            <input id="street-address">
             <div class="field"></div>
                 <label>Which level: </label>
                 <ul class="checkboxes">
