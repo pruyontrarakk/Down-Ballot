@@ -37,6 +37,7 @@ def user():
         user_info['level_choices'] = request.form['level_choices']
         user_info['policy_choices'] = request.form['policy_choices']
         current_year_elections, rep_data = get_elections(user_info['address'])
+        print(user_info)
         return jsonify({"elections": current_year_elections, "representatives": rep_data})
     else:
         return render_template('form.html')
