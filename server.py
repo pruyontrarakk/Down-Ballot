@@ -4,7 +4,7 @@ from openai import OpenAI
 
 import datetime
 
-from api_secrets import OPENAI_API_KEY, MAPS_API_KEY
+from api_secrets import OPENAI_API_KEY, MAPS_API_KEY, CIVIC_INFO_API_KEY
 
 
 openai_client = OpenAI(api_key=OPENAI_API_KEY)
@@ -16,7 +16,6 @@ list_inquiry = ["Election Ballot", "Environmental Issues", "Healthcare Issues",
 
 
 app = Flask(__name__)
-civic_info_key = 'AIzaSyBdkH1aq-ZlY8UhEEEI7-YfLghVN82N6UY'
 base_elections_url = 'https://www.googleapis.com/civicinfo/v2/elections'
 base_representatives_url = 'https://www.googleapis.com/civicinfo/v2/representatives'
 
@@ -49,12 +48,12 @@ def send_request_to_api():
     address = f'1600 Amphitheatre Parkway, Mountain View, {state} {zip_code}'
 
     params = {
-        'key': civic_info_key
+        'key': CIVIC_INFO_API_KEY
     }
 
     current_year = datetime.now().year
     # get the current year's election info
-    elections_response = requests.get(base_elections_url, params=civic_info_key)
+    elections_response = requests.get(base_elections_url, params=CIVIC_INFO_API_KEY)
     if elections_response.status_code == 200:
         elections_data = elections_response.json()
         elections = elections_data.get('elections', [])
@@ -74,7 +73,7 @@ def send_request_to_api():
 
     # get representative information
     rep_params = {
-        'key': civic_info_key,
+        'key': CIVIC_INFO_API_KEY,
         'address': address
     }
 
