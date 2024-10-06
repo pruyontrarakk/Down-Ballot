@@ -19,21 +19,26 @@ def home():
     return render_template('form.html', maps_api_key=MAPS_API_KEY, level=list_level, inquiry=list_inquiry)
 
 
-@app.route('/results', methods=['GET'])
+@app.route('/results', methods=['POST', 'GET'])
 def show_results():
     # # Get the form data
-    # street_address = request.form.get('address')
-    # selected_levels = request.form.getlist('level')  # Multiple selections
-    # selected_inquiries = request.form.getlist('inquiry')  # Multiple selections
+    street_address = request.form.get('address')
+    selected_levels = request.form.getlist('level')  # Multiple selections
+    selected_inquiries = request.form.getlist('inquiry')  # Multiple selections
+    print(street_address)
+    print(selected_levels)
+    print(selected_inquiries)
     #
     # # This is just placeholder data; in reality, you'd use real data from API
-    # info = [
-    #     {'name': 'ava', 'platform': [{'issue': 'Climate Change', 'policy': ''}, {'issue': '', 'policy': ''}]},
-    #     {'name': 'pru', 'platform': [{'issue': 'Healthcare', 'policy': ''}]}
-    # ]
+    info = [
+        {'name': 'ava', 'platform': [{'issue': 'Climate Change', 'policy': ''}, {'issue': '', 'policy': ''}]},
+        {'name': 'pru', 'platform': [{'issue': 'Healthcare', 'policy': ''}]}
+    ]
 
     # Pass the form data and results to the results template
-    return render_template('results.html')
+    # return render_template('results.html')
+    return render_template('results.html', address=street_address, levels=selected_levels, inquiries=selected_inquiries)
+
 
 
 def get_elections(address: str):

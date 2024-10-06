@@ -202,3 +202,57 @@ label {
 .footer-content {
     padding-right: 30px; /* Adds padding inside the footer */
 }
+
+/* for results*/
+
+/* Container for each result */
+.result-box {
+    background-color: #F4EDE4;
+    max-width: 1000px; /* Control the width of the container */
+    margin: 20px auto; /* Center the container */
+    padding: 15px;
+    border-radius: 10px;
+}
+
+/* Heading for the name */
+.result-box h4 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 8px;  /* Spacing between name and issue */
+    text-align: center;   /* Center-align the name */
+}
+
+/* Styling for the issue */
+.result-box p strong {
+    font-size: 1rem;
+    color: #F4EDE4;
+    margin-bottom: 6px;  /* Space between issue and policy */
+}
+
+/* Styling for the policy */
+.result-box p {
+    font-size: 0.9rem;
+    color: #F4EDE4;
+}
+
+/* Add a horizontal line between results */
+hr {
+    border: none;
+    border-top: 1px solid #F4EDE4;  /* Subtle line */
+    margin: 20px 0;  /* Add space around the line */
+}
+
+/* Make sure the container is responsive */
+@media (max-width: 700px) {
+    .result-box {
+        padding: 10px;  /* Less padding on smaller screens */
+    }
+}
+
+
+label_results {
+    display: block;
+    margin-bottom: 8px; /* Decrease margin */
+    color: #295b70;
+    font-size: 1rem; /* Decrease font-size */
+}

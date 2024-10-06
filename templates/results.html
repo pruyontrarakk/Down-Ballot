@@ -1,48 +1,43 @@
 {% extends "layout.html" %}
 
-# pass in variable - a list with dictionaries  [{name: [{issue: , desc: }]}, {name: [{issue: , desc: }]}, ...]
-
-
 {% block content %}
 <main class="form-container">
-<!--    <form class="form" id="user-info" action="">-->
-
-        <div class="field"></div>
-        <label>Upcoming Elections: </label>
-        <ul class="checkboxes">
-            {% for election in current_year_elections %}
-            <li class="checkbox" value="{{election}}">
-            </li>
-            {% endfor %}
-        </ul>
-
-        <br>
-        <br>
-
-        <label>Your Representatives: </label>
-        <ul class="checkboxes-2">
-
-            {% for data in rep_data %}
-            <li class="checkbox">
-                <input type="checkbox" id="choice-{{i}}" class="checkbox-input" name="choice" value="{{i}}">
-                <label for="choice-{{i}}">{{i}}</label>
-            </li>
-            {% endfor %}
-        </ul>
-<!--    </form>-->
-
-
-        <!-- Containers for name, issue, and policy -->
-        <div id="results-container">
-
-            <div class="result-box">
-                <h4>S1:</h4>  <!-- Name as S1 -->
-                <p><strong>S3:</strong></p>  <!-- Issue as S3 -->
-                <p><strong>P:</strong></p>  <!-- Policy as P -->
-            </div>
-            <hr>
+    <div id="results-container" class="compact-container">
+        <!-- Upcoming Elections Section -->
+        <div class="result-box">
+            <h4>Upcoming Elections:</h4>
+            <ul class="checkboxes">
+                {% for election in current_year_elections %}
+                <li class="checkbox" value="{{election}}">
+                    {{ election.name }} on {{ election.electionDay }}
+                </li>
+                {% endfor %}
+            </ul>
         </div>
 
+        <!-- Representatives Section -->
+        <div class="result-box">
+            <h4>Your Representatives:</h4>
+            <ul class="checkboxes-2">
+                {% for rep in rep_data %}
+                <li class="checkbox">
+                    <input type="checkbox" id="choice-{{loop.index}}" class="checkbox-input" name="choice" value="{{ rep.name }}">
+                    <label_results for="choice-{{loop.index}}">{{ rep.name }} ({{ rep.party }})</label_results>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
 
+        <!-- Candidate Results Section -->
+        <div class="result-box">
+            <h4>Results</h4>
+            <div class="result-box">
+                <label_results><strong>Kamala Harris</strong></label_results>
+                <label_results><strong>Issue:</strong> Climate Change</label_results>
+                <label_results><strong>Policy:</strong> Supports aggressive action on climate, endorses rejoining international accords like the Paris Agreement, and pushing for green energy investments.</label_results>
+            </div>
+
+        </div>
+    </div>
 </main>
 {% endblock %}

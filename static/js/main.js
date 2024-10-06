@@ -34,18 +34,19 @@ $(document).ready(function () {
         // If the form is valid, make the AJAX call
         if (formData.has('policy_choices') && formData.has('level_choices') && formData.has('address')) {
             $.ajax({
-                type: "GET",
+                type: "POST",
                 url: "/results",
                 data: formData,
                 processData: false,
                 contentType: false,
                 success: function (response) {
-                    let info = [
-        {'name': 'ava', 'platform': [{'issue': 'Climate Change', 'policy': ''}, {'issue': '', 'policy': ''}]},
-        {'name': 'pru', 'platform': [{'issue': 'Healthcare', 'policy': ''}]}
-    ]
+                    // let info = [
+                    //     {'name': 'ava', 'platform': [{'issue': 'Climate Change', 'policy': ''}, {'issue': '', 'policy': ''}]},
+                    //     {'name': 'pru', 'platform': [{'issue': 'Healthcare', 'policy': ''}]}
+                    // ]
                     // change location of the window
                     window.location.href = "/results";
+
                     getPolicyFromGPT(info).then((value) => {
                         console.log(value)
                         JSON.parse(value).forEach((candidate) => {
@@ -77,6 +78,8 @@ $(document).ready(function () {
                     console.error('Error sending data:', error);
                 }
             });
+        } else {
+            console.log("form doesn't work")
         }
     });
 });
