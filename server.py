@@ -1,7 +1,7 @@
 import datetime
 import requests
 from flask import Flask, request, render_template
-from api_secrets import MAPS_API_KEY, CIVIC_INFO_API_KEY
+from api_secrets import MAPS_API_KEY, CIVIC_INFO_API_KEY, OPENAI_API_KEY
 
 list_level = ["Federal", "State", "District", "Local"]
 list_inquiry = ["Climate Change", "Healthcare", "Immigration", "Education",
@@ -16,7 +16,7 @@ base_representatives_url = 'https://www.googleapis.com/civicinfo/v2/representati
 @app.route('/')
 def home():
     """Render the form on the homepage."""
-    return render_template('form.html', maps_api_key=MAPS_API_KEY, level=list_level, inquiry=list_inquiry)
+    return render_template('form.html', maps_api_key=MAPS_API_KEY, openai_api_key=OPENAI_API_KEY, level=list_level, inquiry=list_inquiry)
 
 
 @app.route('/results', methods=['POST', 'GET'])

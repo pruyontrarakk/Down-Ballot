@@ -1,12 +1,16 @@
-
 $(document).ready(function () {
+    const OPENAI_API_KEY = $('#openai_api_key').text();
     console.log("DOM is fully loaded and ready.");
     resetAllInputs();
 
     let addr_input = document.getElementById('street-address');
-    let addr_autocomplete = new google.maps.places.Autocomplete(addr_input);
+    let addr_autocomplete;
     let address;
-    addr_autocomplete.setComponentRestrictions({'country': ['us']});
+
+    if (addr_input) {
+        addr_autocomplete = new google.maps.places.Autocomplete(addr_input);
+        addr_autocomplete.setComponentRestrictions({'country': ['us']});
+    }
 
     $("#user-info").on("submit", function (event) {
         event.preventDefault();  // Prevent normal form submission
@@ -40,15 +44,18 @@ $(document).ready(function () {
                 processData: false,
                 contentType: false,
                 success: function (response) {
-                    // let info = [
-                    //     {'name': 'ava', 'platform': [{'issue': 'Climate Change', 'policy': ''}, {'issue': '', 'policy': ''}]},
-                    //     {'name': 'pru', 'platform': [{'issue': 'Healthcare', 'policy': ''}]}
-                    // ]
+                    let info = [
+                        {
+                            'name': 'ava',
+                            'platform': [{'issue': 'Climate Change', 'policy': ''}, {'issue': '', 'policy': ''}]
+                        },
+                        {'name': 'pru', 'platform': [{'issue': 'Healthcare', 'policy': ''}]}
+                    ]
                     // change location of the window
-                    window.location.href = "/results";
 
                     getPolicyFromGPT(info).then((value) => {
                         console.log(value)
+
                         JSON.parse(value).forEach((candidate) => {
                             // Create a container for each candidate
                             let candidate_html = $(`
@@ -69,6 +76,7 @@ $(document).ready(function () {
                             });
 
                             // Append the candidate's container to the results container
+                            window.location.href = "/results";
                             $("#results-container").append(candidate_html);
                         })
                     });
@@ -81,37 +89,40 @@ $(document).ready(function () {
         } else {
             console.log("form doesn't work")
         }
+
     });
+
+    async function getPolicyFromGPT(candidate_array) {
+        try {
+            console.log(OPENAI_API_KEY)
+            const response = await axios.post(
+                'https://api.openai.com/v1/completions',
+                {
+                    model: "gpt-4o-mini",  // Replace with the model you want to use
+                    prompt: `Here's an array of candidates for the 2024 election, fill in the 
+                policy field with 1-2 sentence summary of the candidate's position ${candidate_array}. 
+                The output needs to match the input except with the policy field filled in for each issue`,
+                },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${OPENAI_API_KEY}`,
+                        'Content-Type': 'application/json'
+                    }
+                }
+            );
+
+            console.log(response.data);
+        } catch (error) {
+            console.error('Error with OpenAI request:', error);
+        }
+    }
+
 });
 
 function resetAllInputs() {
     $("#street-address").val('');
     $('#policy-interests input[name="choice"]').prop('checked', false);
     $('#levels input[name="choice"]').prop('checked', false);
-}
-
-async function getPolicyFromGPT(candidate_array) {
-    try {
-        const response = await axios.post(
-            'https://api.openai.com/v1/completions',
-            {
-                model: "gpt-4o-mini",  // Replace with the model you want to use
-                prompt: `Here's an array of candidates for the 2024 election, fill in the 
-                policy field with 1-2 sentence summary of the candidate's position ${candidate_array}. 
-                The output needs to match the input except with the policy field filled in for each issue`,
-            },
-            {
-                headers: {
-                    'Authorization': `Bearer ${OPENAI_API_KEY}`,
-                    'Content-Type': 'application/json'
-                }
-            }
-        );
-
-        console.log(response.data);
-    } catch (error) {
-        console.error('Error with OpenAI request:', error);
-    }
 }
 
 
