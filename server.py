@@ -23,30 +23,6 @@ def home():
     return render_template('form.html', maps_api_key=MAPS_API_KEY, openai_api_key=OPENAI_API_KEY, level=list_level, inquiry=list_inquiry)
 
 
-# @app.route('/results', methods=['POST', 'GET'])
-# def show_results():
-#     # # Get the form data
-#
-#     street_address = request.form.get('address')
-#     selected_levels = request.form.getlist('level')  # Multiple selections
-#     selected_inquiries = request.form.getlist('inquiry')  # Multiple selections
-#     print(street_address)
-#     print(selected_levels)
-#     print(selected_inquiries)
-#     #
-#     # # This is just placeholder data; in reality, you'd use real data from API
-#     info = [
-#         {'name': 'ava', 'platform': [{'issue': 'Climate Change', 'policy': ''}, {'issue': '', 'policy': ''}]},
-#         {'name': 'pru', 'platform': [{'issue': 'Healthcare', 'policy': ''}]}
-#     ]
-#
-#     # Pass the form data and results to the results template
-#     # return render_template('results.html')
-#     return render_template('results.html', address=street_address, levels=selected_levels, inquiries=selected_inquiries)
-#
-#
-
-
 @app.route('/results', methods=['POST', 'GET'])
 def show_results():
     if request.method == 'POST':
@@ -91,11 +67,6 @@ def extract_representative_data(rep_data):
 
     return representatives
 
-# Example usage:
-rep_data = [{'name': 'Joseph R. Biden', 'address': [{'line1': '1600 Pennsylvania Avenue Northwest', 'city': 'Washington', 'state': 'DC', 'zip': '20500'}], 'party': 'Democratic Party', 'phones': ['(202) 456-1111'], 'urls': ['https://www.whitehouse.gov/', 'https://en.wikipedia.org/wiki/Joe_Biden'], 'channels': [{'type': 'Twitter', 'id': 'potus'}]}, {'name': 'Kamala D. Harris', 'address': [{'line1': '1600 Pennsylvania Avenue Northwest', 'city': 'Washington', 'state': 'DC', 'zip': '20500'}], 'party': 'Democratic Party', 'phones': ['(202) 456-1111'], 'urls': ['https://www.whitehouse.gov/', 'https://en.wikipedia.org/wiki/Kamala_Harris'], 'channels': [{'type': 'Twitter', 'id': 'VP'}]}]
-
-representatives = extract_representative_data(rep_data)
-print(representatives)
 
 @app.route("/post_results", methods=['POST'])
 def post_results():

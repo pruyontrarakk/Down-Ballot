@@ -8,7 +8,7 @@ body, html {
     height: 100%; /* Ensure full height */
 }
 
-h1, h2 {
+h1, h2, h4 {
     color: #333;
 }
 
@@ -89,6 +89,24 @@ label {
     border-radius: 5px;
     margin-bottom: 5px;
     text-align: center;
+}
+
+.button-box-2 {
+    border: 1px solid #6A9FB5; /* Muted Blue */
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    text-align: left;
+    background-color: #f8f5f2;
+}
+
+.button-box-3 {
+    border: 1px solid #6A9FB5; /* Muted Blue */
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+    background-color: #f8f5f2;
 }
 
 /* Styling the label inside the box */
@@ -178,13 +196,13 @@ label {
 .site-header h1 {
     margin: 0;
     font-size: 1.7rem; /* Decrease font-size */
-    color: #B5695D; /* Soft Cream */
+    color: #813b30; /* Soft Cream */
 }
 
 .site-header p {
     margin: 0;
     font-size: 0.8rem; /* Decrease font-size */
-    color: #DFA89E; /* Light Muted Red */
+    color: #b77e74; /* Light Muted Red */
 }
 
 /* Footer styling */
@@ -217,7 +235,7 @@ label {
 /* Heading for the name */
 .result-box h4 {
     font-size: 1.2rem;
-    color: #333;
+    color: #814036;
     margin-bottom: 8px;  /* Spacing between name and issue */
     text-align: center;   /* Center-align the name */
 }
@@ -255,4 +273,25 @@ label_results {
     margin-bottom: 8px; /* Decrease margin */
     color: #295b70;
     font-size: 1rem; /* Decrease font-size */
+}
+
+/*for democratic vs republicans*/
+
+.representatives-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.democratic, .republican {
+    width: 45%;
+}
+
+.democratic ul, .republican ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.democratic h5, .republican h5 {
+    text-align: center;
+    color: #a86666;
 }

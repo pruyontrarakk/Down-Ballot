@@ -45,6 +45,7 @@ $(document).ready(function () {
                 processData: false,
                 contentType: false,
                 success: function (response) {
+
                     let info = [
                         {
                             'name': 'ava',
@@ -63,7 +64,8 @@ $(document).ready(function () {
                             data: JSON.stringify(data),
                             contentType: 'application/json',
                             success: function (response) {
-                                console.log('Sent to server:', response )
+                                console.log('Sent to server:', response)
+                                window.location.href = '/results'
                             },
                             error: function (error) {
                                 console.error('Error sending data:', error);
