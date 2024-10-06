@@ -27,14 +27,14 @@ $(document).ready(function () {
         $('#policy-interests input[name="choice"]:checked').each(function () {
             policy_choices.push($(this).val());
         });
-        formData.append("policy_choices", policy_choices);
+        formData.append("policy_choices", JSON.stringify(policy_choices));
 
         // Get the selected levels
         let levels = [];
         $('#levels input[name="choice"]:checked').each(function () {
             levels.push($(this).val());
         });
-        formData.append("level_choices", levels);
+        formData.append("level_choices", JSON.stringify(levels));
 
         // If the form is valid, make the AJAX call
         if (formData.has('policy_choices') && formData.has('level_choices') && formData.has('address')) {
