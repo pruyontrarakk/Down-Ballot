@@ -94,14 +94,24 @@ $(document).ready(function () {
 
     async function getPolicyFromGPT(candidate_array) {
         try {
-            console.log(OPENAI_API_KEY)
             const response = await axios.post(
-                'https://api.openai.com/v1/completions',
+                'https://api.openai.com/v1/chat/completions',
                 {
                     model: "gpt-4o-mini",  // Replace with the model you want to use
-                    prompt: `Here's an array of candidates for the 2024 election, fill in the 
-                policy field with 1-2 sentence summary of the candidate's position ${candidate_array}. 
-                The output needs to match the input except with the policy field filled in for each issue`,
+                    messages: [
+                        {
+                            role: 'user',
+                            content: `Here's an array of candidates for the 2024 election. For each issue, fill in the
+                            policy field with 1-2 sentence summary of the candidate's position. The array is:
+                            ${JSON.stringify(candidate_array, null, 2)}.
+                            The output needs to match the input (stringified JSON) except with the policy field filled in for each issue.`
+                        },
+                        {
+                            role: 'system',
+                            content: "You are trying to help someone understand the policy positions of the candidates in their local elections. Keep answers minimal and informative."
+                        }
+                    ],
+                    temperature: 0.3,
                 },
                 {
                     headers: {
@@ -112,6 +122,7 @@ $(document).ready(function () {
             );
 
             console.log(response.data);
+            return response.data.choices[0].message.content;
         } catch (error) {
             console.error('Error with OpenAI request:', error);
         }
