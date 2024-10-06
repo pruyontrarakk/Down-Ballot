@@ -7,6 +7,7 @@ $(document).ready(function () {
     let addr_autocomplete;
     let address;
 
+
     if (addr_input) {
         addr_autocomplete = new google.maps.places.Autocomplete(addr_input);
         addr_autocomplete.setComponentRestrictions({'country': ['us']});
@@ -47,38 +48,28 @@ $(document).ready(function () {
                     let info = [
                         {
                             'name': 'ava',
-                            'platform': [{'issue': 'Climate Change', 'policy': ''}, {'issue': '', 'policy': ''}]
+                            'c_platform': [{'issue': 'Climate Change', 'policy': ''}, {'issue': '', 'policy': ''}]
                         },
-                        {'name': 'pru', 'platform': [{'issue': 'Healthcare', 'policy': ''}]}
+                        {'name': 'pru', 'c_platform': [{'issue': 'Healthcare', 'policy': ''}]}
                     ]
-                    // change location of the window
 
                     getPolicyFromGPT(info).then((value) => {
-                        console.log(value)
+                        const data = JSON.parse(value);
+                        console.log(data)
 
-                        JSON.parse(value).forEach((candidate) => {
-                            // Create a container for each candidate
-                            let candidate_html = $(`
-                                <div class="result-box">
-                                    <h4>${candidate.name}:</h4>  <!-- Candidate's Name -->
-                                </div>
-                            `);
+                        $.ajax({
+                            type: "POST",
+                            url: "/post_results",
+                            data: JSON.stringify(data),
+                            contentType: 'application/json',
+                            success: function (response) {
+                                console.log('Sent to server:', response )
+                            },
+                            error: function (error) {
+                                console.error('Error sending data:', error);
+                            }
+                        });
 
-                            // Loop through each platform (issue-policy pair) for the candidate
-                            candidate.c_platform.forEach((pl) => {
-                                let platform_html = $(`
-                                    <p><strong>Issue:</strong> ${pl.issue}</p>  <!-- Issue -->
-                                    <p><strong>Policy:</strong> ${pl.policy}</p>  <!-- Policy -->
-                                `);
-
-                                // Append platform details to the candidate's container
-                                candidate_html.append(platform_html);
-                            });
-
-                            // Append the candidate's container to the results container
-                            window.location.href = "/results";
-                            $("#results-container").append(candidate_html);
-                        })
                     });
                     // Assuming the server responds with JSON containing elections and representatives
                 },

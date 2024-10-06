@@ -8,6 +8,7 @@ list_inquiry = ["Climate Change", "Healthcare", "Immigration", "Education",
                 "Housing", "Foreign Policy", "Infrastructure", "Economy",
                 "Criminal Justice", "Guns", "Reproductive Health"]
 
+policy_results = []
 app = Flask(__name__)
 base_elections_url = 'https://www.googleapis.com/civicinfo/v2/elections'
 base_representatives_url = 'https://www.googleapis.com/civicinfo/v2/representatives'
@@ -39,7 +40,11 @@ def show_results():
     # return render_template('results.html')
     return render_template('results.html', address=street_address, levels=selected_levels, inquiries=selected_inquiries)
 
-
+@app.route("/post_results", methods=['POST'])
+def post_results():
+    global policy_results
+    policy_results = request.get_json()
+    return policy_results
 
 def get_elections(address: str):
     """Fetch elections and representatives based on address."""
