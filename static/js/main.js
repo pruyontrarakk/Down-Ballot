@@ -45,35 +45,8 @@ $(document).ready(function () {
                 processData: false,
                 contentType: false,
                 success: function (response) {
-
-                    let info = [
-                        {
-                            'name': 'ava',
-                            'c_platform': [{'issue': 'Climate Change', 'policy': ''}, {'issue': '', 'policy': ''}]
-                        },
-                        {'name': 'pru', 'c_platform': [{'issue': 'Healthcare', 'policy': ''}]}
-                    ]
-
-                    getPolicyFromGPT(info).then((value) => {
-                        const data = JSON.parse(value);
-                        console.log(data)
-
-                        $.ajax({
-                            type: "POST",
-                            url: "/post_results",
-                            data: JSON.stringify(data),
-                            contentType: 'application/json',
-                            success: function (response) {
-                                console.log('Sent to server:', response)
-                                window.location.href = '/results'
-                            },
-                            error: function (error) {
-                                console.error('Error sending data:', error);
-                            }
-                        });
-
-                    });
-                    // Assuming the server responds with JSON containing elections and representatives
+                    console.log('Data sent successfully');
+                    resetAllInputs();
                 },
                 error: function (error) {
                     console.error('Error sending data:', error);

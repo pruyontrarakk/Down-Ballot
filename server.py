@@ -1,8 +1,10 @@
 import datetime
 import json
 import os
+
 import requests
 from flask import Flask, session, redirect, url_for, request, render_template
+
 from api_secrets import MAPS_API_KEY, CIVIC_INFO_API_KEY, OPENAI_API_KEY
 
 list_level = ["Federal", "State", "District", "Local"]
@@ -17,6 +19,7 @@ base_elections_url = 'https://www.googleapis.com/civicinfo/v2/elections'
 base_representatives_url = 'https://www.googleapis.com/civicinfo/v2/representatives'
 app.config['SECRET_KEY'] = os.urandom(24)
 
+
 @app.route('/')
 def home():
     """Render the form on the homepage."""
@@ -25,6 +28,7 @@ def home():
 
 @app.route('/results', methods=['POST', 'GET'])
 def show_results():
+    global policy_results
     if request.method == 'POST':
         session['street_address'] = request.form.get('address')
         session['selected_levels'] = request.form.getlist('level')
@@ -33,10 +37,22 @@ def show_results():
         # Fetch the election data
         current_year_elections, rep_data = get_elections(session['street_address'])
 
+        # prepare the candidate array for gpt
+        candidate_array = [
+            {
+                'name': rep['name'],
+                'party': rep['party'],
+                'phones': rep['phones'],
+                'urls': rep['urls'],
+                'c_platform': [{'issue': iss_name, 'policy': ''} for iss_name in session['selected_inquiries']]
+            }
+            for rep in rep_data['officials']
+        ]
+        policy_results = get_policy_from_gpt(candidate_array, OPENAI_API_KEY)
+        # print(candidate_array_with_policies)
         # Store data in session
         session['current_year_elections'] = current_year_elections
-        session['rep_data'] = rep_data['officials']
-        print(session['rep_data'])
+        # session['rep_data'] = rep_data['officials']
 
         # Redirect to the GET route
         return redirect(url_for('show_results'))
@@ -44,14 +60,16 @@ def show_results():
     elif request.method == 'GET':
         # Handle the GET request separately here
         current_year_elections = session.get('current_year_elections', [])
-        rep_data = session.get('rep_data', {})
-        representatives=extract_representative_data(rep_data)
+        # rep_data = session.get('rep_data', {})
+        # representatives = extract_representative_data(rep_data)
+        representatives = policy_results
 
         return render_template(
             'results.html',
             current_year_elections=current_year_elections,
-            representatives = representatives
+            representatives=representatives
         )
+
 
 def extract_representative_data(rep_data):
     representatives = []
@@ -73,6 +91,7 @@ def post_results():
     global policy_results
     policy_results = request.get_json()
     return policy_results
+
 
 def get_elections(address: str):
     """Fetch elections and representatives based on address."""
@@ -105,6 +124,44 @@ def get_elections(address: str):
         rep_data = {}
 
     return current_year_elections, rep_data
+
+
+def get_policy_from_gpt(candidate_array, openai_api_key):
+    try:
+        headers = {
+            'Authorization': f'Bearer {openai_api_key}',
+            'Content-Type': 'application/json'
+        }
+
+        data = {
+            "model": "gpt-4o",  # Replace with the model you want to use
+            "messages": [
+                {
+                    "role": "user",
+                    "content": f"Here's an array of candidates for the 2024 election. For each issue, fill in the "
+                               f"policy field with 1-2 sentence summary of the candidate's position on that issue. The"
+                               f" array is: {json.dumps(candidate_array, indent=2)}. The output needs to match the "
+                               f"input (raw, stringified JSON) except with the policy field filled in for each issue. "
+                               f"No need to mark the response as json via backticks! just return the stringified JSON."
+                },
+                {
+                    "role": "system",
+                    "content": "You are trying to help someone understand the policy positions of the candidates in "
+                               "their local elections. Keep answers minimal and informative."
+                }
+            ],
+            "temperature": 0.4
+        }
+
+        response = requests.post('https://api.openai.com/v1/chat/completions', headers=headers, json=data)
+        response.raise_for_status()  # Raise an exception for HTTP errors
+
+        response_data = response.json()
+
+        return response_data['choices'][0]['message']['content']
+    except requests.exceptions.RequestException as e:
+        print(f'Error with OpenAI request: {e}')
+        return
 
 
 if __name__ == '__main__':
