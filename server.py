@@ -43,7 +43,6 @@ def show_results():
                 'name': rep['name'],
                 'party': rep['party'],
                 'phones': rep['phones'],
-                'urls': rep['urls'],
                 'c_platform': [{'issue': iss_name, 'policy': ''} for iss_name in session['selected_inquiries']]
             }
             for rep in rep_data['officials']

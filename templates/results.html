@@ -7,7 +7,6 @@
         <div class="result-box">
             <h4>Upcoming Elections:</h4>
             <div class="button-box-3">
-                {{current_year_elections|length}}
                 {% for election in current_year_elections %}
                 <div class="results">
                     <strong> {{ election['name'] }} on {{ election['electionDay'] }}</strong>
