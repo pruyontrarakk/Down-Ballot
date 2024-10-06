@@ -49,31 +49,23 @@ def show_results():
             for rep in rep_data['officials']
         ]
         policy_results = get_policy_from_gpt(candidate_array, OPENAI_API_KEY)
-        # print(candidate_array_with_policies)
         # Store data in session
-        session['current_year_elections'] = current_year_elections
-        # session['rep_data'] = rep_data['officials']
 
-        # Redirect to the GET route
+        session['current_year_elections'] = current_year_elections
         return redirect(url_for('show_results'))
 
     elif request.method == 'GET':
         # Handle the GET request separately here
         current_year_elections = session.get('current_year_elections', [])
         # rep_data = session.get('rep_data', {})
-        # representatives = extract_representative_data(rep_data)
-        representatives = policy_results
-
+        print(policy_results)
         return render_template(
             'results.html',
-            current_year_elections=current_year_elections,
-            representatives=representatives
+            representatives=policy_results
         )
-
 
 def extract_representative_data(rep_data):
     representatives = []
-
     for rep in rep_data:
         representative_info = {
             'name': rep.get('name', 'N/A'),
@@ -84,13 +76,6 @@ def extract_representative_data(rep_data):
         representatives.append(representative_info)
 
     return representatives
-
-
-@app.route("/post_results", methods=['POST'])
-def post_results():
-    global policy_results
-    policy_results = request.get_json()
-    return policy_results
 
 
 def get_elections(address: str):
@@ -158,7 +143,7 @@ def get_policy_from_gpt(candidate_array, openai_api_key):
 
         response_data = response.json()
 
-        return response_data['choices'][0]['message']['content']
+        return json.loads(response_data['choices'][0]['message']['content'])
     except requests.exceptions.RequestException as e:
         print(f'Error with OpenAI request: {e}')
         return

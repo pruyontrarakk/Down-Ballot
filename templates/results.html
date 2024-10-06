@@ -8,11 +8,11 @@
             <h4>Upcoming Elections:</h4>
             <div class="button-box-3">
                 {% for election in current_year_elections %}
-                    <label_results>
-                        <strong> {{ election.name }} on {{ election.electionDay }}</strong>
-                    </label_results>
+                <label_results>
+                    <strong> {{ election['name'] }} on {{ election['electionDay'] }}</strong>
+                </label_results>
                 {% else %}
-                    <li>No upcoming elections found.</li>
+                <li>No upcoming elections found.</li>
                 {% endfor %}
             </div>
         </div>
@@ -21,41 +21,53 @@
         <div class="result-box">
             <h4>Results</h4>
             <div class="button-box-2">
-                <label_results-1><strong>Kamala Harris</strong></label_results-1>
-                <label_results><strong>Issue:</strong> Climate Change</label_results>
-                <label_results><strong>Policy:</strong> Supports aggressive action on climate, endorses rejoining international accords like the Paris Agreement, and pushing for green energy investments.</label_results>
-            </div>
-
-        </div>
-
-
-        <!-- Representatives Section -->
-        <div class="result-box">
-            <h4>Your Representatives:</h4>
-            <div class="representatives-container">
-                <div class="democratic">
-                    <h5>DEMOCRATIC PARTY</h5>
-                    <div class="button-box-3">
-                        {% for rep in representatives if rep.party == 'Democratic Party' %}
-                        <label_results>{{ rep.name }}, {{ rep.phones }}</label_results>
-                        {% else %}
-                        <label_results>No representatives found.</label_results>
-                        {% endfor %}
-                    </div>
+                {%for candidate in representatives %}
+                <div class="candidate-container">
+                <div class="candidate-name"><strong>{{candidate['name']}}</strong></div>
+                {% for issue in candidate['c_platform']%}
+                <div class="candidate-platform-plank">
+                    <div class="candidate-issue"><strong>Issue:</strong></div>
+                    <div>{{issue['issue']}}</div>
+                    <div class="candidate-policy"><strong>Policy:</strong></div>
+                    <div>{{issue['policy']}}</div>
                 </div>
-
-                <div class="republican">
-                    <h5>REPUBLICAN PARTY</h5>
-                    <div class="button-box-3">
-                        {% for rep in representatives if rep.party == 'Republican Party' %}
-                        <label_results>{{ rep.name }}, {{ rep.phones }}</label_results>
-                        {% else %}
-                        <label_results>No representatives found.</label_results>
-                        {% endfor %}
-                    </div>
+                {% endfor %}
                 </div>
+                {% endfor %}
             </div>
         </div>
+    </div>
+
+
+    <!-- Representatives Section -->
+    <div class="result-box">
+        <h4>Your Representatives:</h4>
+        <div class="representatives-container">
+            <div class="democratic">
+                <h5>DEMOCRATIC PARTY</h5>
+                <div class="button-box-3">
+                    {% for rep in representatives %}
+                    {% if rep[party] == 'Democratic Party' %}
+                    <label class="results">{{ rep['name'] }}, {{ rep['phones'] }}</label>
+                    {%endif%}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="republican">
+                <h5>REPUBLICAN PARTY</h5>
+                <div class="button-box-3">
+
+                    {% for rep in representatives %}
+                    {%if rep['party'] == 'Republican Party'%}
+                    <label class="results">{{ rep['name'] }}, {{ rep['phones'] }}</label>
+                    {% endif %}
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     </div>

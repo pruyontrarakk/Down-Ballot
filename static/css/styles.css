@@ -268,20 +268,29 @@ hr {
 }
 
 
-label_results {
-    display: block;
+.candidate-issue {
+    display: inline;
     margin-bottom: 8px; /* Decrease margin */
     color: #295b70;
     font-size: 1rem; /* Decrease font-size */
 }
 
-label_results-1{
-
+.candidate-name {
     display: block;
     margin-bottom: 8px; /* Decrease margin */
     color: #295b70;
-    font-size: 1.5rem; /* Decrease font-size */
+    font-size: 1.25rem; /* Decrease font-size */
 
+}
+.candidate-policy {
+    display:inline
+}
+
+.candidate-platform-plank {
+    padding: .5em
+}
+.candidate-container {
+    padding:1em
 }
 
 /*for democratic vs republicans*/
