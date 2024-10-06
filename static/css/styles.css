@@ -1,6 +1,6 @@
 /* General styling */
 body, html {
-    background-color: #F4EDE4; /* Soft Cream */
+    background-color: #F4EDE4!important; /* Soft Cream */
     font-family: 'Lato', sans-serif;
     margin: 0; /* Remove any margin from the body and html */
     padding: 0; /* Remove any padding from the body and html */

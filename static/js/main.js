@@ -51,13 +51,13 @@ $(document).ready(function () {
                     resetAllInputs();
                     window.location.href = "/results";
 
-                    $("#spinner-container").addClass("d-none");
+                    $("#spinner-container").hide();
                     $("#main-content").show();
                 },
                 error: function (error) {
                     console.error('Error sending data:', error);
 
-                    $("#spinner-container").addClass("d-none");
+                    $("#spinner-container").hide();
                     $("#main-content").show();
                 }
             });
