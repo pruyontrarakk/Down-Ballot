@@ -7,12 +7,13 @@
         <div class="result-box">
             <h4>Upcoming Elections:</h4>
             <div class="button-box-3">
+                {{current_year_elections|length}}
                 {% for election in current_year_elections %}
-                <label_results>
+                <div class="results">
                     <strong> {{ election['name'] }} on {{ election['electionDay'] }}</strong>
-                </label_results>
+                </div>
                 {% else %}
-                <li>No upcoming elections found.</li>
+                <div>No upcoming elections found.</div>
                 {% endfor %}
             </div>
         </div>
@@ -20,22 +21,28 @@
         <!-- Candidate Results Section -->
         <div class="result-box">
             <h4>Results</h4>
+
+            {%for candidate in representatives %}
             <div class="button-box-2">
-                {%for candidate in representatives %}
                 <div class="candidate-container">
-                <div class="candidate-name"><strong>{{candidate['name']}}</strong></div>
-                {% for issue in candidate['c_platform']%}
-                <div class="candidate-platform-plank">
-                    <div class="candidate-issue"><strong>Issue:</strong></div>
-                    <div>{{issue['issue']}}</div>
-                    <div class="candidate-policy"><strong>Policy:</strong></div>
-                    <div>{{issue['policy']}}</div>
+                    <div class="candidate-name"><strong>{{candidate['name']}}</strong></div>
+                    {% for issue in candidate['c_platform']%}
+                    <div class="candidate-platform-plank">
+                        <div class="candidate-issue">
+                            <div class="issue-bold">{{issue['issue']}}</div>
+                        </div>
+                        <div class="candidate-policy">
+                            <div>{{issue['policy']}}</div>
+                        </div>
+                    </div>
+
+                    {% endfor %}
                 </div>
-                {% endfor %}
-                </div>
-                {% endfor %}
-            </div>
+            </div   >
+
+            {% endfor %}
         </div>
+    </div>
     </div>
 
 

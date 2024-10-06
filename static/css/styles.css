@@ -268,11 +268,11 @@ hr {
 }
 
 
-.candidate-issue {
+.issue-bold {
     display: inline;
     margin-bottom: 8px; /* Decrease margin */
     color: #295b70;
-    font-size: 1rem; /* Decrease font-size */
+    font-size: 1.0rem; /* Decrease font-size */
 }
 
 .candidate-name {
@@ -283,6 +283,14 @@ hr {
 
 }
 .candidate-policy {
+    display: flex;
+    gap: 2px
+}
+.candidate-issue {
+    display: flex;
+    gap:2px
+}
+.policy-bold {
     display:inline
 }
 

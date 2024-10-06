@@ -61,7 +61,8 @@ def show_results():
         print(policy_results)
         return render_template(
             'results.html',
-            representatives=policy_results
+            representatives=policy_results,
+            current_year_elections=current_year_elections
         )
 
 def extract_representative_data(rep_data):
