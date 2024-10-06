@@ -104,7 +104,8 @@ $(document).ready(function () {
                             content: `Here's an array of candidates for the 2024 election. For each issue, fill in the
                             policy field with 1-2 sentence summary of the candidate's position. The array is:
                             ${JSON.stringify(candidate_array, null, 2)}.
-                            The output needs to match the input (stringified JSON) except with the policy field filled in for each issue.`
+                            The output needs to match the input (raw, stringified JSON) except with the policy field filled in for each issue.
+                            No need to mark the response as json via backticks! just return the stringified JSON.`
                         },
                         {
                             role: 'system',
