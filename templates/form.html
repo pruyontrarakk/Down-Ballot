@@ -9,7 +9,13 @@
 ></script>
 <div hidden id="openai_api_key">{{openai_api_key}}</div>
 
-<main class="form-container">
+<div id="spinner-container" class="d-none">
+    <div class="spinner-border text-danger m-5" role="status">
+        <span class="visually-hidden"></span>
+    </div>
+</div>
+
+<main id="main-content" class="form-container">
     <br>
     <form class="form" id="user-info" action="/results" method="POST">
         <div class="field half">

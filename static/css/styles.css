@@ -321,3 +321,28 @@ hr {
     text-align: center;
     color: #a86666;
 }
+
+.spinner-container {
+    width: 2rem; /* $spinner-width */
+    height: 2rem; /* $spinner-height */
+    vertical-align: -.125em; /* $spinner-vertical-align */
+    border-width: .25em; /* $spinner-border-width */
+    animation: spinner-animation .75s; /* $spinner-animation-speed */
+    display: none;
+}
+
+.spinner-sm {
+    width: 1rem; /* $spinner-width-sm */
+    height: 1rem; /* $spinner-height-sm */
+    border-width: .2em; /* $spinner-border-width-sm */
+}
+
+/* Example animation */
+@keyframes spinner-animation {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes spinner-border {
+    to { transform: rotate(360deg); }
+}

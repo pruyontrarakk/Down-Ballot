@@ -16,6 +16,9 @@ $(document).ready(function () {
     $("#user-info").on("submit", function (event) {
         event.preventDefault();  // Prevent normal form submission
 
+        $("#spinner-container").removeClass("d-none").addClass("d-flex justify-content-center");
+        $("#main-content").hide();
+
         address = addr_autocomplete.getPlace();
         let formData = new FormData();
 
@@ -48,13 +51,22 @@ $(document).ready(function () {
                     console.log('Data sent successfully');
                     resetAllInputs();
                     window.location.href = "/results";
+
+                    $("#spinner-container").addClass("d-none");
+                    $("#main-content").show();
                 },
                 error: function (error) {
                     console.error('Error sending data:', error);
+
+                    $("#spinner-container").addClass("d-none");
+                    $("#main-content").show();
                 }
             });
         } else {
             console.log("form doesn't work")
+
+            $("#spinner-container").addClass("d-none");
+            $("#main-content").show();
         }
 
     });
