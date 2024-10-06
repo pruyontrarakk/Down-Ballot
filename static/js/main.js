@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    const OPENAI_API_KEY = $('#openai_api_key').text();
     console.log("DOM is fully loaded and ready.");
     resetAllInputs();
 
@@ -79,33 +78,4 @@ function resetAllInputs() {
     $('#levels input[name="choice"]').prop('checked', false);
 }
 
-
-// Function to dynamically display the results on the page
-function displayResults(elections, representatives) {
-    let resultsContainer = $("<div></div>");
-
-    // Add elections
-    if (elections.length > 0) {
-        resultsContainer.append("<h3>Upcoming Elections:</h3>");
-        let electionsList = $("<ul></ul>");
-        elections.forEach(function (election) {
-            electionsList.append(`<li>${election.name} on ${election.electionDay}</li>`);
-        });
-        resultsContainer.append(electionsList);
-    }
-
-    // Add representatives
-    if (representatives && representatives.officials.length > 0) {
-        resultsContainer.append("<h3>Your Representatives:</h3>");
-        let repsList = $("<ul></ul>");
-        representatives.officials.forEach(function (rep) {
-            repsList.append(`<li>${rep.name} (${rep.party})</li>`);
-        });
-        resultsContainer.append(repsList);
-    }
-
-
-    // Clear previous results and add the new results to the page
-    $("#results-section").empty().append(resultsContainer);
-}
 
